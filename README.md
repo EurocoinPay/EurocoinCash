@@ -1,43 +1,30 @@
-This is the reference code for [CryptoNote](https://cryptonote.org) cryptocurrency protocol.
+This is the Fork for the Cryptocurrency Eurocoin Cash - forking reference code for [CryptoNote](https://cryptonote.org) cryptocurrency protocol.
 
-* Launch your own CryptoNote currency: [CryptoNote Starter](https://cryptonotestarter.org/)
-* CryptoNote reference implementation: [CryptoNoteCoin](https://cryptonote-coin.org)
-* Discussion board and support: [CryptoNote Forum](https://forum.cryptonote.org)
+Fork [CryptoNote repository](https://github.com/cryptonotefoundation/cryptonote)
 
-## CryptoNote forking how-to
+Plataform: several Ubuntu-based dedicated servers (at least 2Gb of RAM) for seed nodes.
 
-### Preparation
+Written in C.
 
-1. Create an account on [GitHub.com](github.com)
-2. Fork [CryptoNote repository](https://github.com/cryptonotefoundation/cryptonote)
-3. Buy one or two Ubuntu-based dedicated servers (at least 2Gb of RAM) for seed nodes.
-
-
-
-### First step. Give a name to your coin
-
-**Good name must be unique.** Check uniqueness with [google](http://google.com) and [Map of Coins](mapofcoins.com) or any other similar service.
-
-Name must be specified twice:
+@martinarguello
 
 **1. in file src/CryptoNoteConfig.h** - `CRYPTONOTE_NAME` constant
 
-Example: 
+
 ```
-const char CRYPTONOTE_NAME[] = "furiouscoin";
+const char CRYPTONOTE_NAME[] = "EurocoinCash";
 ```
 
 **2. in src/CMakeList.txt file** - set_property(TARGET daemon PROPERTY OUTPUT_NAME "YOURCOINNAME**d**")
 
-Example: 
+
 ```
-set_property(TARGET daemon PROPERTY OUTPUT_NAME "furiouscoind")
+set_property(TARGET daemon PROPERTY OUTPUT_NAME "EurocoinCashd")
 ```
 
-**Note:** You should also change a repository name.
 
 
-### Second step. Emission logic 
+Emission logic 
 
 **1. Total money supply** (src/CryptoNoteConfig.h)
 
@@ -71,14 +58,14 @@ Difficulty target directly influences several aspects of coin's behavior:
 
 For most coins difficulty target is 60 or 120 seconds.
 
-Example:
+
 ```
-const uint64_t DIFFICULTY_TARGET = 120;
+const uint64_t DIFFICULTY_TARGET = 60;
 ```
 
 **4. Block reward formula**
 
-In case you are not satisfied with CryptoNote default implementation of block reward logic you can also change it. The implementation is in `src/CryptoNoteCore/Currency.cpp`:
+The implementation is in `src/CryptoNoteCore/Currency.cpp`:
 ```
 bool Currency::getBlockReward(size_t medianSize, size_t currentBlockSize, uint64_t alreadyGeneratedCoins, uint64_t fee, uint64_t& reward, int64_t& emissionChange) const
 ```
@@ -88,7 +75,7 @@ This function has two parts:
 - basic block reward calculation: `uint64_t baseReward = (m_moneySupply - alreadyGeneratedCoins) >> m_emissionSpeedFactor;`
 - big block penalty calculation: this is the way CryptoNote protects the block chain from transaction flooding attacks and preserves opportunities for organic network growth at the same time.
 
-Only the first part of this function is directly related to the emission logic. You can change it the way you want. See MonetaVerde and DuckNote as the examples where this function is modified.
+Only the first part of this function is directly related to the emission logic.
 
 
 ### Third step. Networking
@@ -98,11 +85,6 @@ Only the first part of this function is directly related to the emission logic. 
 P2P port is used by daemons to talk to each other through P2P protocol.
 RPC port is used by wallet and other programs to talk to daemon.
 
-It's better to choose ports that aren't used by other software or coins. See known TCP ports lists:
-
-* http://www.speedguide.net/ports.php
-* http://www.networksorcery.com/enp/protocol/ip/ports00000.htm
-* http://keir.net/portlist.html
 
 Example:
 ```
@@ -123,7 +105,6 @@ const static boost::uuids::uuid CRYPTONOTE_NETWORK = { { 0xA1, 0x1A, 0xA1, 0x1A,
 
 Add IP addresses of your seed nodes.
 
-Example:
 ```
 const std::initializer_list<const char*> SEED_NODES = {
   "111.11.11.11:17236",
@@ -138,7 +119,6 @@ const std::initializer_list<const char*> SEED_NODES = {
 
 Zero minimum fee can lead to transaction flooding. Transactions cheaper than the minimum transaction fee wouldn't be accepted by daemons. 100000 value for `MINIMUM_FEE` is usually enough.
 
-Example:
 ```
 const uint64_t MINIMUM_FEE = 100000;
 ```
@@ -146,9 +126,9 @@ const uint64_t MINIMUM_FEE = 100000;
 
 **2. Penalty free block size** (src/CryptoNoteConfig.h)
 
-CryptoNote protects chain from tx flooding by reducing block reward for blocks larger than the median block size. However, this rule applies for blocks larger than `CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE` bytes.
+CryptoNote Protocol use for EurocoinCash protects chain from tx flooding by reducing block reward for blocks larger than the median block size. However, this rule applies for blocks larger than `CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE` bytes.
 
-Example:
+
 ```
 const size_t CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE = 20000;
 ```
@@ -156,9 +136,9 @@ const size_t CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE = 20000;
 
 ### Fifth step. Address prefix
 
-You may choose a letter (in some cases several letters) all the coin's public addresses will start with. It is defined by `CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX` constant. Since the rules for address prefixes are nontrivial you may use the [prefix generator tool](https://cryptonotestarter.org/tools.html).
+You may choose a letter (in some cases several letters) all the coin's public addresses will start with. It is defined by `CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX` constant. Since the rules for address prefixes are nontrivial you may use the [prefix generator tool]
 
-Example:
+
 ```
 const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0xe9; // addresses start with "f"
 ```
@@ -170,9 +150,9 @@ const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0xe9; // addresses star
 
 You should leave `const char GENESIS_COINBASE_TX_HEX[]` blank and compile the binaries without it.
 
-Example:
+
 ```
-const char GENESIS_COINBASE_TX_HEX[] = "";
+const char GENESIS_COINBASE_TX_HEX[] = "Nuestro primer bloque genesis de nuestra propia Blockchain";
 ```
 
 
@@ -180,7 +160,7 @@ const char GENESIS_COINBASE_TX_HEX[] = "";
 
 Run your daemon with `--print-genesis-tx` argument. It will print out the genesis block coinbase transaction hash.
 
-Example:
+
 ```
 furiouscoind --print-genesis-tx
 ```
@@ -190,7 +170,7 @@ furiouscoind --print-genesis-tx
 
 Copy the tx hash that has been printed by the daemon to `GENESIS_COINBASE_TX_HEX` in `src/CryptoNoteConfig.h`
 
-Example:
+
 ```
 const char GENESIS_COINBASE_TX_HEX[] = "013c01ff0001ffff...785a33d9ebdba68b0";
 ```
@@ -198,7 +178,7 @@ const char GENESIS_COINBASE_TX_HEX[] = "013c01ff0001ffff...785a33d9ebdba68b0";
 
 **4. Recompile the binaries**
 
-Recompile everything again. Your coin code is ready now. Make an announcement for the potential users and enjoy!
+Recompile everything again. The coin code is ready now. 
 
 
 ## Building CryptoNote 
@@ -238,4 +218,3 @@ cmake -G "Visual Studio 12 Win64" ..
 ```
 
 And then do Build.
-Good luck!
