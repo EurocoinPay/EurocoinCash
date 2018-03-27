@@ -15,7 +15,7 @@ Written in C.
 const char CRYPTONOTE_NAME[] = "EurocoinCash";
 ```
 
-**2. in src/CMakeList.txt file** - set_property(TARGET daemon PROPERTY OUTPUT_NAME "YOURCOINNAME**d**")
+**2. in src/CMakeList.txt file** - set_property(TARGET daemon PROPERTY OUTPUT_NAME "EurocoinCash**d**")
 
 
 ```
