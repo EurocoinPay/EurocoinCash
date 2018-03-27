@@ -6,7 +6,7 @@ Plataform: several Ubuntu-based dedicated servers (at least 2Gb of RAM) for seed
 
 Written in C++.
 
-@martinarguello
+@martinarguello @sebanielsen
 
 **1. in file src/CryptoNoteConfig.h** - `CRYPTONOTE_NAME` constant
 
