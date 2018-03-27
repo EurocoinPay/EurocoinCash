@@ -26,7 +26,7 @@ set_property(TARGET daemon PROPERTY OUTPUT_NAME "EurocoinCashd")
 
 Emission logic 
 
-**1. Total money supply** (src/CryptoNoteConfig.h)
+**1. Total money supply** 
 
 Total amount of coins to be emitted. Most of CryptoNote based coins use `(uint64_t)(-1)` (equals to 18446744073709551616). You can define number explicitly (for example `UINT64_C(858986905600000000)`).
 
@@ -35,7 +35,7 @@ Example:
 const uint64_t MONEY_SUPPLY = (uint64_t)(-1);
 ```
 
-**2. Emission curve** (src/CryptoNoteConfig.h)
+**2. Emission curve** 
 
 Be default CryptoNote provides emission formula with slight decrease of block reward with each block. This is different from Bitcoin where block reward halves every 4 years.
 
@@ -46,7 +46,7 @@ Example:
 const unsigned EMISSION_SPEED_FACTOR = 18;
 ```
 
-**3. Difficulty target** (src/CryptoNoteConfig.h)
+**3. Difficulty target** 
 
 Difficulty target is an ideal time period between blocks. In case an average time between blocks becomes less than difficulty target, the difficulty increases. Difficulty target is measured in seconds.
 
@@ -80,7 +80,7 @@ Only the first part of this function is directly related to the emission logic.
 
 ### Third step. Networking
 
-**1. Default ports for P2P and RPC networking** (src/CryptoNoteConfig.h)
+**1. Default ports for P2P and RPC networking** 
 
 P2P port is used by daemons to talk to each other through P2P protocol.
 RPC port is used by wallet and other programs to talk to daemon.
@@ -93,7 +93,7 @@ const int RPC_DEFAULT_PORT = 18236;
 ```
 
 
-**2. Network identifier** (src/P2p/P2pNetworks.h)
+**2. Network identifier** 
 
 This identifier is used in network packages in order not to mix two different cryptocoin networks. Change all the bytes to random values for your network:
 ```
@@ -101,7 +101,7 @@ const static boost::uuids::uuid CRYPTONOTE_NETWORK = { { 0xA1, 0x1A, 0xA1, 0x1A,
 ```
 
 
-**3. Seed nodes** (src/CryptoNoteConfig.h)
+**3. Seed nodes** 
 
 Add IP addresses of your seed nodes.
 
@@ -115,7 +115,7 @@ const std::initializer_list<const char*> SEED_NODES = {
 
 ### Fourth step. Transaction fee and related parameters
 
-**1. Minimum transaction fee** (src/CryptoNoteConfig.h)
+**1. Minimum transaction fee** 
 
 Zero minimum fee can lead to transaction flooding. Transactions cheaper than the minimum transaction fee wouldn't be accepted by daemons. 100000 value for `MINIMUM_FEE` is usually enough.
 
@@ -124,7 +124,7 @@ const uint64_t MINIMUM_FEE = 100000;
 ```
 
 
-**2. Penalty free block size** (src/CryptoNoteConfig.h)
+**2. Penalty free block size** 
 
 CryptoNote Protocol use for EurocoinCash protects chain from tx flooding by reducing block reward for blocks larger than the median block size. However, this rule applies for blocks larger than `CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE` bytes.
 
@@ -146,7 +146,7 @@ const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0xe9; // addresses star
 
 ### Sixth step. Genesis block
 
-**1. Build the binaries with blank genesis tx hex** (src/CryptoNoteConfig.h)
+**1. Build the binaries with blank genesis tx hex** 
 
 You should leave `const char GENESIS_COINBASE_TX_HEX[]` blank and compile the binaries without it.
 
@@ -166,7 +166,7 @@ furiouscoind --print-genesis-tx
 ```
 
 
-**3. Copy the printed transaction hash** (src/CryptoNoteConfig.h)
+**3. Copy the printed transaction hash** 
 
 Copy the tx hash that has been printed by the daemon to `GENESIS_COINBASE_TX_HEX` in `src/CryptoNoteConfig.h`
 
@@ -181,7 +181,7 @@ const char GENESIS_COINBASE_TX_HEX[] = "013c01ff0001ffff...785a33d9ebdba68b0";
 Recompile everything again. The coin code is ready now. 
 
 
-## Building CryptoNote 
+## Building 
 
 ### On *nix
 
