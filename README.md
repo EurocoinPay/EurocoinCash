@@ -4,7 +4,7 @@ Fork [CryptoNote repository](https://github.com/cryptonotefoundation/cryptonote)
 
 Plataform: several Ubuntu-based dedicated servers (at least 2Gb of RAM) for seed nodes.
 
-Written in C.
+Written in C++.
 
 @martinarguello
 
