@@ -1,4 +1,4 @@
-This is the Fork for the Cryptocurrency Eurocoin Cash - forking reference code for [CryptoNote](https://cryptonote.org) cryptocurrency protocol.
+This is the Fork for the Cryptocurrency Eurocoin Cash - forking reference code from [CryptoNote](https://cryptonote.org) cryptocurrency protocol.
 
 Fork [CryptoNote repository](https://github.com/cryptonotefoundation/cryptonote)
 
