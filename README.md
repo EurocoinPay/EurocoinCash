@@ -1,6 +1,5 @@
 This is the Fork for the Cryptocurrency Eurocoin Cash - forking reference code from [CryptoNote](https://cryptonote.org) cryptocurrency protocol.
 
-Fork [CryptoNote repository](https://github.com/cryptonotefoundation/cryptonote)
 
 Plataform: several Ubuntu-based dedicated servers (at least 2Gb of RAM) for seed nodes.
 
